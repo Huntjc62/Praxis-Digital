@@ -19,3 +19,7 @@ Open index.html locally or deploy the folder to GitHub Pages, Netlify, Vercel or
 - Replace the illustrative project imagery with real client/project photography.
 - Connect the enquiry form to a CRM/backend instead of mailto if you want enquiries automatically captured.
 - Add legal pages, analytics, SEO metadata and cookie/privacy controls as required.
+
+
+## Accent colour update
+The PRAXIS accent is now a consistent blue (`#3026B8`). The header navigation uses this same blue and the previous bright lime/yellow accent has been changed to the same blue for a unified brand treatment.
