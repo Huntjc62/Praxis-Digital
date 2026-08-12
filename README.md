@@ -23,3 +23,7 @@ Open index.html locally or deploy the folder to GitHub Pages, Netlify, Vercel or
 
 ## Accent colour update
 The PRAXIS accent is now a consistent blue (`#3026B8`). The header navigation uses this same blue and the previous bright lime/yellow accent has been changed to the same blue for a unified brand treatment.
+
+
+## Final colour treatment
+The bright lime/yellow PRAXIS accent remains throughout the site. The header navigation links use PRAXIS blue (#3026B8), and only the large statement/quote section uses that blue as its background.
