@@ -101,3 +101,12 @@ All four individual service pages now use clickable expandable capability rows:
 - Bespoke software
 
 Each capability opens a short explanation, with one item expanded at a time.
+
+
+## Our Work page
+A dedicated `work.html` page has been added with:
+- Filterable project cards for Websites, Software and Systems
+- Placeholder project links ready to replace with live URLs
+- A rotating 3D-style client logo carousel using editable word-logo placeholders
+- Responsive layouts and pause-on-hover carousel behaviour
+- A case-study framework covering challenge, solution and result

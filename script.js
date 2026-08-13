@@ -57,3 +57,23 @@ document.querySelectorAll('.capability-row').forEach(button=>{
     answer.classList.toggle('open',!isOpen);
   });
 });
+
+document.querySelectorAll('.project-filter').forEach(button=>{
+  button.addEventListener('click',()=>{
+    document.querySelectorAll('.project-filter').forEach(b=>b.classList.remove('active'));
+    button.classList.add('active');
+    const filter=button.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(card=>{
+      card.classList.toggle('hidden',filter!=='all' && card.dataset.category!==filter);
+    });
+  });
+});
+
+document.querySelectorAll('.placeholder-link').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const old=link.textContent;
+    link.textContent=link.dataset.placeholder || 'Link coming soon';
+    setTimeout(()=>{link.textContent=old},1800);
+  });
+});

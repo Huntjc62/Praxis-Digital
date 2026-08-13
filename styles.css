@@ -143,3 +143,76 @@ footer{background:var(--ink);color:#fff;padding:0 5vw 25px}.foot-top{border-top:
 @media(max-width:900px){.stats{grid-template-columns:1fr 1fr}.table-head{display:none}.enquiry-row{grid-template-columns:1fr auto;gap:10px}.enquiry-row>div:nth-child(2),.enquiry-row>div:nth-child(3),.enquiry-row>div:nth-child(4){grid-column:1}.enquiry-row>div:nth-child(5){grid-column:2;grid-row:1}.enquiry-row>div:nth-child(6){grid-column:2;grid-row:2}.dashboard-heading{display:block}.dashboard-heading p{margin-top:20px}.toolbar{flex-wrap:wrap}.toolbar .count{margin-left:0}.modal-meta,.modal-form{grid-template-columns:1fr}.modal-form .full{grid-column:auto}}
 @media(max-width:520px){.dashboard{padding:35px 5vw}.stats{grid-template-columns:1fr 1fr}.stat strong{font-size:32px}.toolbar input,.toolbar select{width:100%;min-width:0}.login-card{padding:30px}.admin-top{padding:0 5vw}.admin-user{display:none}}
 #formNote{min-height:18px;transition:opacity .2s ease}#formNote[data-type="success"]{color:var(--lime)}#formNote[data-type="error"]{color:#ff8b8b}#form button:disabled{opacity:.65;cursor:wait}
+
+/* OUR WORK */
+.work-hero p{max-width:720px}
+.work-intro{background:var(--paper)}
+.portfolio{background:#e8e6df}
+.portfolio-head{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-top:35px}
+.portfolio-filter{display:flex;flex-wrap:wrap;gap:8px}
+.project-filter{border:1px solid #aaa79f;background:transparent;padding:11px 15px;font-size:11px;font-weight:700;cursor:pointer}
+.project-filter:hover,.project-filter.active{background:var(--ink);border-color:var(--ink);color:#fff}
+.portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:60px}
+.project-card{background:#fff;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease}
+.project-card:hover{transform:translateY(-5px);box-shadow:0 20px 45px #0001}
+.project-card.hidden{display:none}
+.project-visual{height:380px;position:relative;overflow:hidden;padding:24px;color:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.project-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#ffffff0d,transparent 55%,#0002)}
+.project-visual span{font-size:9px;letter-spacing:.16em;position:relative;z-index:2}
+.project-visual b{font:800 56px/.82 Manrope;letter-spacing:-.07em;position:relative;z-index:2}
+.project-visual i{font-style:normal;font-size:22px;position:absolute;right:24px;bottom:24px;z-index:2;color:var(--lime)}
+.pv-one{background:linear-gradient(135deg,#121212,#45413b 45%,#8e9188)}
+.pv-two{background:radial-gradient(circle at 68% 35%,#cfff3f 0 5%,transparent 5.5%),linear-gradient(145deg,#3026b8,#171717 60%)}
+.pv-three{background:linear-gradient(125deg,#1c1d1b 0 35%,#706e67 35% 52%,#d3cbbd 52%)}
+.pv-four{background:linear-gradient(135deg,#d4d0c6,#7e8179 55%,#171717)}
+.project-meta{padding:26px}
+.project-meta small{font-size:9px;color:#777;letter-spacing:.14em}
+.project-meta h3{font:700 25px Manrope;letter-spacing:-.045em;margin:13px 0 9px}
+.project-meta p{font-size:13px;color:var(--muted);line-height:1.6;max-width:470px}
+.project-link{display:inline-block;color:var(--blue);font-size:11px;font-weight:700;border-bottom:1px solid var(--blue);padding-bottom:6px;margin-top:10px}
+.logo-section{background:var(--ink);color:#fff;min-height:700px;padding:120px 5vw;display:grid;grid-template-columns:.65fr 1.35fr;gap:6vw;align-items:center;overflow:hidden}
+.logo-heading .label{color:var(--lime)}
+.logo-heading h2{font:800 clamp(45px,5vw,72px)/.93 Manrope;letter-spacing:-.07em;margin:30px 0}
+.logo-heading h2 span{color:#777}
+.logo-heading p{max-width:390px;color:#999;font-size:14px;line-height:1.7}
+.logo-stage{height:560px;position:relative;display:grid;place-items:center;perspective:1200px}
+.logo-orbit{position:absolute;width:440px;height:440px;transform-style:preserve-3d;animation:clientSpin 24s linear infinite}
+.logo-stage:hover .logo-orbit{animation-play-state:paused}
+.logo-card{position:absolute;width:155px;height:82px;background:#fff;color:#111;display:grid;place-content:center;text-align:center;font:800 17px/.85 Manrope;letter-spacing:-.05em;box-shadow:0 18px 45px #0004;backface-visibility:hidden}
+.logo-card small{font-size:8px;letter-spacing:.15em;margin-top:7px;color:var(--blue)}
+.logo-1{left:142px;top:-10px;transform:rotateX(8deg) rotateY(0deg)}
+.logo-2{right:5px;top:102px;transform:rotateY(-55deg)}
+.logo-3{right:30px;bottom:25px;transform:rotateY(-35deg)}
+.logo-4{left:140px;bottom:-18px;transform:rotateY(0deg)}
+.logo-5{left:5px;bottom:25px;transform:rotateY(35deg)}
+.logo-6{left:0;top:102px;transform:rotateY(55deg)}
+.logo-centre{width:170px;height:170px;border-radius:50%;background:var(--blue);display:grid;place-content:center;text-align:center;z-index:5;box-shadow:0 25px 70px #0005}
+.logo-centre b{font:800 25px Manrope;letter-spacing:-.07em}
+.logo-centre small{font-size:8px;letter-spacing:.15em;color:var(--lime);margin-top:8px}
+@keyframes clientSpin{0%{transform:rotateY(0deg) rotateX(4deg)}50%{transform:rotateY(180deg) rotateX(-4deg)}100%{transform:rotateY(360deg) rotateX(4deg)}}
+.proof{background:#dfddd6}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #bbb8b0;margin-top:55px}
+.proof-grid>div{padding:28px 25px 0 0;border-right:1px solid #bbb8b0;min-height:240px}
+.proof-grid>div:not(:first-child){padding-left:25px}
+.proof-grid>div:last-child{border-right:0}
+.proof-grid span{font-size:10px;color:#888}
+.proof-grid h3{font:700 25px Manrope;letter-spacing:-.04em;margin:45px 0 10px}
+.proof-grid p{font-size:13px;line-height:1.6;color:var(--muted);max-width:330px}
+@media(max-width:850px){
+  .portfolio-head,.logo-section{grid-template-columns:1fr;display:grid}
+  .portfolio-grid{grid-template-columns:1fr}
+  .logo-stage{height:500px}
+  .proof-grid{grid-template-columns:1fr}
+  .proof-grid>div{border-right:0;border-bottom:1px solid #bbb8b0}
+  .proof-grid>div:not(:first-child){padding-left:0}
+}
+@media(max-width:520px){
+  .portfolio-filter{margin-top:15px}
+  .project-visual{height:300px}
+  .project-visual b{font-size:43px}
+  .logo-stage{height:390px}
+  .logo-orbit{width:300px;height:300px}
+  .logo-card{width:105px;height:62px;font-size:12px}
+  .logo-1{left:98px}.logo-2{right:-2px;top:72px}.logo-3{right:10px;bottom:5px}.logo-4{left:97px;bottom:-8px}.logo-5{left:-2px;bottom:5px}.logo-6{left:-4px;top:72px}
+  .logo-centre{width:125px;height:125px}.logo-centre b{font-size:18px}
+}
