@@ -88,9 +88,6 @@ The Firebase web configuration object is not a server secret. Do not put Firebas
 - Backups / export process
 - Privacy policy and cookie controls
 
-## Enquiry form behaviour
-The public enquiry form is now Firebase-only. It does **not** use `mailto:` and will never open a visitor's email provider. A successful submission creates a new document in the Firestore `enquiries` collection with status `new`.
 
-If the form says Firebase is blocking the submission, publish the included `firestore.rules` file in Firebase Console. If the page is being tested from a local `file://` URL, deploy it through Firebase Hosting, GitHub Pages, Netlify or another web server first because browser ES modules and Firebase web SDK requests should be served over HTTP(S).
-
-A cache-busting query (`?v=3`) is included on the Firebase form module so an older deployed `mailto:` version is less likely to remain cached.
+## Admin login state fix
+The admin dashboard now explicitly switches the login and dashboard views after Firebase Authentication and no longer relies only on the HTML `hidden` attribute. This prevents the login panel remaining visible after a successful sign-in.

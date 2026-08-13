@@ -119,15 +119,45 @@ document.getElementById('deleteBtn').addEventListener('click',async()=>{
   try{await deleteDoc(doc(db,'enquiries',selected.id));closeModal();}catch(error){console.error(error);alert('Could not delete this enquiry.');}
 });
 
+function showLogin(message=''){
+  loginView.hidden=false;
+  loginView.style.display='grid';
+  dashboardView.hidden=true;
+  dashboardView.style.display='none';
+  logoutBtn.hidden=true;
+  adminUser.textContent='';
+  if(message) loginError.textContent=message;
+}
+
+function showDashboard(user){
+  loginView.hidden=true;
+  loginView.style.display='none';
+  dashboardView.hidden=false;
+  dashboardView.style.display='block';
+  logoutBtn.hidden=false;
+  adminUser.textContent=user.email || '';
+}
+
 onAuthStateChanged(auth,async user=>{
   if(!user){
-    loginView.hidden=false; dashboardView.hidden=true; logoutBtn.hidden=true; adminUser.textContent='';
-    if(unsubscribe){unsubscribe();unsubscribe=null;} return;
+    showLogin();
+    if(unsubscribe){unsubscribe();unsubscribe=null;}
+    return;
   }
   try{
     const allowed=await verifyAdmin(user);
-    if(!allowed){await signOut(auth);loginView.hidden=false;dashboardView.hidden=true;loginError.textContent='This account is not authorised for the PRAXIS admin area.';return;}
-    loginView.hidden=true;dashboardView.hidden=false;logoutBtn.hidden=false;adminUser.textContent=user.email || '';
+    if(!allowed){
+      await signOut(auth);
+      showLogin('This account is not authorised for the PRAXIS admin area.');
+      return;
+    }
+    showDashboard(user);
+    loginError.textContent='';
     await loadEnquiries();
-  }catch(error){console.error(error);await signOut(auth);loginError.textContent='Admin access could not be verified.';}
+  }catch(error){
+    console.error(error);
+    if(unsubscribe){unsubscribe();unsubscribe=null;}
+    await signOut(auth);
+    showLogin('Admin access could not be verified. Check your Firestore users document and Security Rules.');
+  }
 });

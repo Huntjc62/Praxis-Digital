@@ -85,6 +85,7 @@ footer{background:var(--ink);color:#fff;padding:0 5vw 25px}.foot-top{border-top:
 
 
 .admin-shell{min-height:100vh;background:var(--paper)}
+.admin-shell [hidden]{display:none !important}
 .admin-top{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;background:var(--paper);position:sticky;top:0;z-index:10}
 .admin-top .brand{font-size:20px}.admin-top-right{display:flex;align-items:center;gap:20px}.admin-user{font-size:12px;color:var(--muted)}
 .admin-btn{border:1px solid var(--ink);background:transparent;padding:10px 14px;font-size:11px;font-weight:700;cursor:pointer}.admin-btn.dark{background:var(--ink);color:#fff}.admin-btn.danger{border-color:#b52d2d;color:#b52d2d}.admin-btn:hover{opacity:.7}
