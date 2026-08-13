@@ -27,3 +27,14 @@ This package includes:
 - A `noindex` directive on the admin page.
 
 After deploying to `https://praxis-uk.digital/`, verify the domain in Google Search Console and submit `https://praxis-uk.digital/sitemap.xml`. Then use URL Inspection to request indexing for the homepage and key service pages. A sitemap helps discovery but does not guarantee indexing or rankings.
+
+
+## New in this version: Website Replacement Quiz
+
+Public page: https://praxis-uk.digital/website-quiz/
+
+The quiz contains 10 server-rendered questions and client-side scoring. Results are grouped into: keep/optimise, transform, or rebuild. The page is linked from the homepage and primary navigation and has a canonical URL, descriptive metadata, Open Graph/Twitter metadata, WebPage and BreadcrumbList structured data, and a sitemap entry.
+
+## SEO notes
+
+The public pages use clean extensionless URLs, crawlable HTML anchor links, canonical URLs, robots.txt, and an XML sitemap. The admin area remains excluded from indexing. Submit `https://praxis-uk.digital/sitemap.xml` in Google Search Console after deployment.

@@ -77,3 +77,93 @@ document.querySelectorAll('.placeholder-link').forEach(link=>{
     setTimeout(()=>{link.textContent=old},1800);
   });
 });
+
+
+// PRAXIS website replacement quiz
+const websiteQuizForm = document.querySelector('#websiteQuizForm');
+if (websiteQuizForm) {
+  const questions = [...websiteQuizForm.querySelectorAll('.quiz-question')];
+  const progressText = document.querySelector('#quizProgressText');
+  const progressBar = document.querySelector('#quizProgressBar');
+  const error = document.querySelector('#quizError');
+  const result = document.querySelector('#quizResult');
+  const resultTitle = document.querySelector('#resultTitle');
+  const resultText = document.querySelector('#resultText');
+  const resultNext = document.querySelector('#resultNext');
+  const resultMark = document.querySelector('#resultMark');
+  const retake = document.querySelector('#retakeQuiz');
+
+  const updateQuizProgress = () => {
+    const answered = questions.filter(q => q.querySelector('input:checked')).length;
+    progressText.textContent = `${answered} / ${questions.length} answered`;
+    progressBar.style.width = `${(answered / questions.length) * 100}%`;
+  };
+
+  websiteQuizForm.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.addEventListener('change', () => {
+      updateQuizProgress();
+      error.hidden = true;
+      const current = input.closest('.quiz-question');
+      current?.classList.add('answered');
+    });
+  });
+
+  websiteQuizForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const unanswered = questions.filter(q => !q.querySelector('input:checked'));
+    if (unanswered.length) {
+      error.textContent = `Please answer all ${questions.length} questions to see your result.`;
+      error.hidden = false;
+      unanswered[0].scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    let riskScore = 0;
+    questions.forEach(question => {
+      const selected = question.querySelector('input:checked');
+      if (selected?.value === 'risk') riskScore += 1;
+    });
+
+    let data;
+    if (riskScore <= 2) {
+      data = {
+        mark:'01',
+        title:"Your website probably doesn't need replacing yet.",
+        text:"Your answers suggest the core of your website is still doing its job. A full rebuild may not be the best use of your budget right now. Focus on improving content, conversion, performance and the parts of the customer journey that are holding you back.",
+        next:"PRAXIS recommendation: keep the foundations that work and improve the areas that don't. If your business has changed, a focused redesign or optimisation project may still be worthwhile."
+      };
+    } else if (riskScore <= 5) {
+      data = {
+        mark:'02',
+        title:'Your website could benefit from a transformation.',
+        text:"Your business has probably moved on faster than your website. There are enough friction points to justify a strategic redesign, but you may not need to throw everything away. The right transformation can improve your messaging, UX, mobile experience, speed and conversion while preserving what already works.",
+        next:"PRAXIS recommendation: map the current site, identify what should stay, then rebuild the experience around your current customers and goals."
+      };
+    } else {
+      data = {
+        mark:'03',
+        title:'It may be time to rebuild from the ground up.',
+        text:"Several core parts of your website are working against the business. A new foundation is likely to give you more value than continually patching an outdated experience. That could mean a new website, a new CMS, better integrations or even a wider digital system.",
+        next:"PRAXIS recommendation: start with the business problem rather than the page count. We can map the right structure, technology and customer journey before anything is built."
+      };
+    }
+
+    resultMark.textContent = data.mark;
+    resultTitle.textContent = data.title;
+    resultText.textContent = data.text;
+    resultNext.textContent = data.next;
+    result.hidden = false;
+    result.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  retake?.addEventListener('click', () => {
+    websiteQuizForm.reset();
+    questions.forEach(q => q.classList.remove('answered'));
+    result.hidden = true;
+    error.hidden = true;
+    updateQuizProgress();
+    document.querySelector('#quiz')?.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  updateQuizProgress();
+}
