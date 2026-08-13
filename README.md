@@ -89,5 +89,15 @@ The Firebase web configuration object is not a server secret. Do not put Firebas
 - Privacy policy and cookie controls
 
 
-## Admin login state fix
-The admin dashboard now explicitly switches the login and dashboard views after Firebase Authentication and no longer relies only on the HTML `hidden` attribute. This prevents the login panel remaining visible after a successful sign-in.
+## Interactive service capabilities
+The new websites service page includes six clickable capability rows. Each expands to a short explanation, with one item open at a time and keyboard-accessible buttons.
+
+
+## Interactive individual service pages
+All four individual service pages now use clickable expandable capability rows:
+- New websites
+- Website transformation
+- Digital systems
+- Bespoke software
+
+Each capability opens a short explanation, with one item expanded at a time.

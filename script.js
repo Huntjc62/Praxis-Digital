@@ -40,3 +40,20 @@ if(selectorButtons.length && result){
     });
   });
 }
+
+document.querySelectorAll('.capability-row').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const answer=button.nextElementSibling;
+    const isOpen=button.getAttribute('aria-expanded')==='true';
+
+    document.querySelectorAll('.capability-row[aria-expanded="true"]').forEach(other=>{
+      if(other!==button){
+        other.setAttribute('aria-expanded','false');
+        other.nextElementSibling.classList.remove('open');
+      }
+    });
+
+    button.setAttribute('aria-expanded',String(!isOpen));
+    answer.classList.toggle('open',!isOpen);
+  });
+});
