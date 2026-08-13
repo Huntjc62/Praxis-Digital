@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRAXIS Admin — Enquiries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="admin-shell">
+<header class="admin-top">
+<a class="brand" href="/"><b>PRAXIS</b><span>●</span></a>
+<div class="admin-top-right"><span class="admin-user" id="adminUser"></span><button class="admin-btn" id="logoutBtn" hidden>Log out</button></div>
+</header>
+<section id="loginView" class="login-wrap">
+<div class="login-card">
+<div class="label">PRAXIS / Private area</div>
+<h1>Enquiry<br>dashboard.</h1>
+<p>Sign in to view and manage website enquiries. Admin accounts are created manually in Firebase — there is no public sign-up.</p>
+<form id="loginForm">
+<label>Email address<input id="loginEmail" type="email" autocomplete="username" required placeholder="admin@praxis.digital"></label>
+<label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+<button class="btn dark" type="submit">Sign in <strong>→</strong></button>
+<div class="login-error" id="loginError"></div>
+</form>
+</div>
+</section>
+<section id="dashboardView" class="dashboard" hidden>
+<div class="dashboard-heading"><div><div class="label">PRAXIS / Enquiries</div><h1>All enquiries.<br><span>One place.</span></h1></div><p>Every website enquiry is stored in Firebase and appears here automatically. Open an enquiry to view the full message, contact the prospect and update its status.</p></div>
+<div class="stats"><div class="stat"><small>Total</small><strong id="totalCount">0</strong></div><div class="stat new"><small>New</small><strong id="newCount">0</strong></div><div class="stat progress"><small>In progress</small><strong id="progressCount">0</strong></div><div class="stat won"><small>Won</small><strong id="wonCount">0</strong></div></div>
+<div class="toolbar"><input id="searchInput" placeholder="Search enquiries…"><select id="statusFilter"><option value="all">All statuses</option><option value="new">New</option><option value="in-progress">In progress</option><option value="qualified">Qualified</option><option value="won">Won</option><option value="lost">Lost</option></select><select id="projectFilter"><option value="all">All projects</option><option>New website</option><option>Website redesign</option><option>Digital system</option><option>Bespoke software</option><option>Not sure yet</option></select><span class="count" id="resultCount">0 enquiries</span></div>
+<div class="enquiry-table"><div class="table-head"><div>Contact</div><div>Business</div><div>Contact details</div><div>Project</div><div>Status</div><div></div></div><div id="enquiryList"></div></div>
+</section>
+<div class="admin-modal-backdrop" id="modalBackdrop"><div class="admin-modal"><div class="modal-top"><div><div class="label">Enquiry</div><h2 id="modalName">Enquiry</h2></div><button class="modal-close" id="modalClose">×</button></div><div class="modal-meta"><div><small>Business</small><strong id="modalBusiness"></strong></div><div><small>Project</small><strong id="modalProject"></strong></div><div><small>Email</small><a id="modalEmail"></a></div><div><small>Phone</small><a id="modalPhone"></a></div><div><small>Received</small><strong id="modalDate"></strong></div><div><small>Source</small><strong id="modalSource"></strong></div></div><div class="modal-message"><small>Message</small><p id="modalMessage"></p></div><div class="modal-form"><label>Status<select id="modalStatus"><option value="new">New</option><option value="in-progress">In progress</option><option value="qualified">Qualified</option><option value="won">Won</option><option value="lost">Lost</option></select></label><label class="full">Internal notes<textarea id="modalNotes" rows="5" placeholder="Add notes about calls, quotes, follow-ups, etc."></textarea></label></div><div class="modal-actions"><div class="modal-actions-left"><button class="admin-btn danger" id="deleteBtn">Delete enquiry</button><span class="save-message" id="saveMessage"></span></div><button class="admin-btn dark" id="saveBtn">Save changes</button></div></div></div>
+<script type="module" src="/admin.js"></script>
+</body></html>
