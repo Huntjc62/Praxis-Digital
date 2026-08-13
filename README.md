@@ -110,3 +110,7 @@ A dedicated `work.html` page has been added with:
 - A rotating 3D-style client logo carousel using editable word-logo placeholders
 - Responsive layouts and pause-on-hover carousel behaviour
 - A case-study framework covering challenge, solution and result
+
+
+## PRAXIS Digital logo
+The supplied PRAXIS Digital circular logo has been added as `assets/praxis-digital-logo.png` and is used in the public website navigation/footer and admin navigation for consistent branding. The supplied logo image itself has not been regenerated or altered.
