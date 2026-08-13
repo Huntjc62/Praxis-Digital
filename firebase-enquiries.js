@@ -1,46 +1,82 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-import { firebaseConfig } from "./firebase-config.js";
+// PRAXIS — public enquiry form -> Cloud Firestore
+// This file deliberately contains NO mailto behaviour. Submissions are written
+// directly to Firestore and never open the visitor's email provider.
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { db } from "./firebase-config.js";
 
-const form = document.getElementById('projectForm');
-const note = document.getElementById('formNote');
+const form = document.getElementById("projectForm");
+const note = document.getElementById("formNote");
+
+function setMessage(message, type = "info") {
+  if (!note) return;
+  note.textContent = message;
+  note.dataset.type = type;
+}
 
 if (form) {
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  form.addEventListener('submit', async (event) => {
+  // Capture the submit event before any other handler can turn it into a
+  // normal browser form submission. There is intentionally no mailto fallback.
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const data = new FormData(form);
+    event.stopImmediatePropagation();
+
     const button = form.querySelector('button[type="submit"]');
-    const original = button.innerHTML;
-    button.disabled = true;
-    button.innerHTML = 'Sending enquiry…';
-    note.textContent = '';
+    const original = button ? button.innerHTML : "Send project enquiry";
+    const data = new FormData(form);
+
+    const enquiry = {
+      name: String(data.get("name") || "").trim(),
+      business: String(data.get("business") || "").trim(),
+      email: String(data.get("email") || "").trim().toLowerCase(),
+      phone: String(data.get("phone") || "").trim(),
+      project: String(data.get("project") || "").trim(),
+      message: String(data.get("message") || "").trim(),
+      status: "new",
+      notes: "",
+      source: "website",
+      createdAt: serverTimestamp()
+    };
+
+    if (!enquiry.name || !enquiry.business || !enquiry.email) {
+      setMessage("Please complete your name, business name and email address.", "error");
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.innerHTML = "Sending enquiry…";
+    }
+    setMessage("Sending your enquiry…", "info");
 
     try {
-      await addDoc(collection(db, 'enquiries'), {
-        name: String(data.get('name') || '').trim(),
-        business: String(data.get('business') || '').trim(),
-        email: String(data.get('email') || '').trim().toLowerCase(),
-        phone: String(data.get('phone') || '').trim(),
-        project: String(data.get('project') || '').trim(),
-        message: String(data.get('message') || '').trim(),
-        status: 'new',
-        notes: '',
-        source: 'website',
-        createdAt: serverTimestamp()
-      });
+      const docRef = await addDoc(collection(db, "enquiries"), enquiry);
 
+      console.log("PRAXIS enquiry saved:", docRef.id);
       form.reset();
-      note.textContent = 'Thanks — your enquiry has been sent. We’ll be in touch soon.';
-      button.innerHTML = 'Enquiry sent ✓';
-      setTimeout(() => { button.innerHTML = original; button.disabled = false; }, 3500);
+      setMessage("Thanks — your enquiry has been sent. We'll be in touch soon.", "success");
+
+      if (button) button.innerHTML = "Enquiry sent ✓";
+      setTimeout(() => {
+        if (button) {
+          button.innerHTML = original;
+          button.disabled = false;
+        }
+      }, 3500);
     } catch (error) {
-      console.error(error);
-      note.textContent = 'We couldn’t send your enquiry just now. Please email hello@praxis.digital instead.';
-      button.innerHTML = original;
-      button.disabled = false;
+      console.error("PRAXIS Firestore enquiry error:", error);
+
+      let message = "We couldn't send your enquiry just now. Please try again.";
+      if (error?.code === "permission-denied") {
+        message = "The enquiry form is connected, but Firebase is blocking the submission. Please check your Firestore rules.";
+      } else if (error?.message?.includes("network")) {
+        message = "We couldn't connect to Firebase. Please check your internet connection and try again.";
+      }
+
+      setMessage(message, "error");
+      if (button) {
+        button.innerHTML = original;
+        button.disabled = false;
+      }
     }
-  });
+  }, true);
 }

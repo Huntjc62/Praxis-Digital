@@ -1,11 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import { getFirestore, collection, query, orderBy, onSnapshot, doc, getDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-import { firebaseConfig } from "./firebase-config.js";
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import { collection, query, orderBy, onSnapshot, doc, getDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { auth, db } from "./firebase-config.js";
 
 const loginView = document.getElementById('loginView');
 const dashboardView = document.getElementById('dashboardView');
@@ -113,7 +108,7 @@ document.getElementById('saveBtn').addEventListener('click',async()=>{
   if(!selected) return;
   const btn=document.getElementById('saveBtn'); const msg=document.getElementById('saveMessage'); btn.disabled=true; msg.textContent='Saving…';
   try{
-    await updateDoc(doc(db,'enquiries',selected.id),{status:document.getElementById('modalStatus').value,notes:document.getElementById('modalNotes').value.trim(),updatedAt:new Date()});
+    await updateDoc(doc(db,'enquiries',selected.id),{status:document.getElementById('modalStatus').value,notes:document.getElementById('modalNotes').value.trim(),updatedAt:serverTimestamp()});
     msg.textContent='Saved';
   }catch(error){console.error(error);msg.textContent='Could not save';}
   btn.disabled=false;

@@ -1,4 +1,3 @@
-
 document.querySelector('.menu')?.addEventListener('click',()=>{
   document.querySelector('.nav nav')?.classList.toggle('mobile-open');
 });
@@ -39,23 +38,5 @@ if(selectorButtons.length && result){
       resultText.textContent=answers[key];
       result.hidden=false;
     });
-  });
-}
-
-const form=document.getElementById('projectForm');
-if(form){
-  form.addEventListener('submit',e=>{
-    e.preventDefault();
-    const data=new FormData(form);
-    const subject=encodeURIComponent('New PRAXIS project enquiry — '+data.get('business'));
-    const body=encodeURIComponent(`Name: ${data.get('name')}
-Business: ${data.get('business')}
-Email: ${data.get('email')}
-Project: ${data.get('project')}
-
-Message:
-${data.get('message')}`);
-    window.location.href=`mailto:hello@praxis.digital?subject=${subject}&body=${body}`;
-    document.getElementById('formNote').textContent='Opening your email app with the enquiry prepared…';
   });
 }

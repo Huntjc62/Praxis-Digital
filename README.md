@@ -1,101 +1,96 @@
-# PRAXIS — expanded website + Firebase enquiry CRM
+# PRAXIS — Full website + Firebase enquiry CRM
 
 PRAXIS — Technology that puts your business into action.
 
-## Included
-- `index.html` — main website
-- `services.html` — services overview
-- `service-websites.html` — new websites
-- `service-redesign.html` — website transformation
-- `service-systems.html` — digital systems
-- `service-software.html` — bespoke software
-- `admin.html` — private admin login + enquiry dashboard
-- `admin.js` — Firebase Authentication + Firestore admin logic
-- `firebase-enquiries.js` — public enquiry capture
-- `firebase-config.js` — Firebase web app configuration placeholder
-- `firestore.rules` — production-oriented Firestore rules
-- `firebase.json` — optional Firebase Hosting/Firestore config
-- `styles.css` / `script.js` — site styling and interaction
+This package contains the full PRAXIS marketing website, service pages and private enquiry admin area connected to Firebase.
 
-## Firebase setup
+## Website pages
+- `index.html` — main PRAXIS website
+- `services.html` — services overview and interactive recommendation tool
+- `service-websites.html` — new website service
+- `service-redesign.html` — website transformation service
+- `service-systems.html` — digital systems service
+- `service-software.html` — bespoke software service
 
-### 1. Create the Firebase project
-Go to the Firebase Console and create a project for PRAXIS.
+## Admin
+- `admin.html` — private PRAXIS enquiry dashboard
+- `admin.js` — Firebase Authentication + Firestore dashboard logic
+- No public registration page
+- Admin users are created manually in Firebase Authentication
+- Admin access is additionally checked against `users/{uid}.role == "admin"`
 
-### 2. Add a Web App
-In Firebase Console, open **Project settings** → **Your apps** → add a **Web app**. Copy the Firebase configuration object into `firebase-config.js`.
+## Firebase
+The supplied Firebase Web App configuration for project `praxis-363bf` is already included in `firebase-config.js`.
 
-Do not add a service-account private key to this website. The web configuration values are intended for the browser; access is controlled by Firebase Authentication and Firestore Security Rules.
+The package uses Firebase's modular browser SDK via the official Google CDN. Firebase recommends the modular API for new web integrations, and the browser-module approach is supported for getting started without a bundler.
 
-### 3. Enable Email/Password Authentication
-Firebase Console → **Build** → **Authentication** → **Sign-in method** → enable **Email/Password**.
+## Firebase setup checklist
 
-There is deliberately no sign-up form in `admin.html`. Admin users are created manually in Firebase Console.
+### 1. Authentication
+Firebase Console → Authentication → Sign-in method → enable **Email/Password**.
 
-### 4. Create the Firestore database
-Firebase Console → **Build** → **Firestore Database** → **Create database**. Choose the region appropriate for your users and start with locked/secure rules if prompted.
+Create your admin user manually under Authentication → Users → Add user.
 
-### 5. Create the first admin account
-In Firebase Console → **Authentication** → **Users** → **Add user**.
+There is intentionally no public sign-up form.
 
-Create the admin email/password account you want to use for the PRAXIS dashboard.
+### 2. Firestore
+Firebase Console → Firestore Database → Create database.
 
-Copy the user's **UID**.
+Create a collection called `users`.
+Create a document whose ID is exactly the Firebase Authentication user's UID.
+Add:
 
-Then go to Firestore → **Data** → create:
+- `role` = `admin`
 
-`users`
+The dashboard checks this role before loading enquiries.
 
-Inside it create a document whose document ID is exactly the admin user's UID.
+### 3. Firestore rules
+Publish the included `firestore.rules` file in Firebase Console → Firestore Database → Rules.
 
-Add this field:
+The rules allow:
+- public visitors to create a valid website enquiry;
+- only authorised PRAXIS admins to read, update or delete enquiries;
+- non-admin users to be denied access to the enquiry collection.
 
-`role` = `admin`
+### 4. Hosting
+The included `firebase.json` is ready for Firebase Hosting. Run:
 
-Do not create an admin sign-up page. This UID + role document is what authorises the account to read and manage enquiries.
+`firebase login`
 
-### 6. Apply Firestore Security Rules
-Open Firestore → **Rules**, replace the rules with the contents of `firestore.rules`, and publish them.
+then from this folder:
 
-The intended access model is:
-- Anyone can create a website enquiry.
-- Unauthenticated visitors cannot read enquiries.
-- Authenticated users without the admin role cannot read/write enquiries.
-- Only an authenticated user with `users/{uid}.role == "admin"` can read, update or delete enquiries.
+`firebase init hosting`
 
-### 7. Add your Firebase configuration
-Open `firebase-config.js` and replace:
+and select the existing Firebase project `praxis-363bf`.
 
-- `YOUR_API_KEY`
-- `YOUR_PROJECT_ID`
-- `YOUR_MESSAGING_SENDER_ID`
-- `YOUR_APP_ID`
+Then deploy with:
 
-with the values from your Firebase Web App configuration.
+`firebase deploy`
 
-### 8. Deploy
-You can host this package on Firebase Hosting, GitHub Pages, Netlify or Vercel. If using Firebase Hosting, the included `firebase.json` is a starting point.
+If you are deploying to GitHub Pages or another static host, keep the Firebase web configuration files and deploy all files in the package. Firebase Authentication and Firestore still work from the deployed domain, provided the domain is authorised in Firebase Authentication settings.
 
-For Firebase CLI deployment, install/login to the Firebase CLI, select the project, then deploy Hosting and Firestore rules. If you use another host, publish the files as a normal static site and make sure the Firebase config file is deployed with them.
+## Important
+The Firebase web configuration object is not a server secret. Do not put Firebase Admin SDK service-account credentials or private keys into this website package.
 
-## What the admin area does
-- Admin-only login
-- No public account creation
-- Live Firestore enquiry feed
-- Total / new / in-progress / won counts
-- Search
-- Filter by status
-- Filter by project type
-- Full enquiry view
-- Clickable email addresses (`mailto:`)
-- Clickable phone numbers (`tel:`)
-- Status management
-- Internal notes
-- Delete enquiry
-- Sign out
+## Enquiry flow
+1. Visitor completes the PRAXIS project form.
+2. `firebase-enquiries.js` writes the enquiry to Firestore.
+3. The enquiry starts with `status: "new"`.
+4. The private admin dashboard listens for changes in real time.
+5. Admin can open an enquiry, email/call the prospect, change status, add internal notes or delete it.
 
-## Important production notes
-- The public form writes directly to Firestore, so consider enabling Firebase App Check before launch to reduce abuse.
-- Do not use open Firestore rules such as `allow read, write: if true` in production.
-- Consider adding email notification automation (for example via a Cloud Function, Make/Zapier or your preferred email service) once the CRM is live.
-- For a production system, add privacy/retention controls and a proper GDPR process for enquiry data.
+## Recommended production additions
+- Custom domain email for PRAXIS
+- Firebase App Check
+- Analytics
+- Automated enquiry acknowledgement email
+- CRM pipeline and quote management
+- Backups / export process
+- Privacy policy and cookie controls
+
+## Enquiry form behaviour
+The public enquiry form is now Firebase-only. It does **not** use `mailto:` and will never open a visitor's email provider. A successful submission creates a new document in the Firestore `enquiries` collection with status `new`.
+
+If the form says Firebase is blocking the submission, publish the included `firestore.rules` file in Firebase Console. If the page is being tested from a local `file://` URL, deploy it through Firebase Hosting, GitHub Pages, Netlify or another web server first because browser ES modules and Firebase web SDK requests should be served over HTTP(S).
+
+A cache-busting query (`?v=3`) is included on the Firebase form module so an older deployed `mailto:` version is less likely to remain cached.
