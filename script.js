@@ -1,5 +1,24 @@
-document.querySelector('.menu')?.addEventListener('click',()=>{
-  document.querySelector('.nav nav')?.classList.toggle('mobile-open');
+document.querySelectorAll('.menu').forEach(menu=>{
+  menu.addEventListener('click',()=>{
+    const nav=menu.closest('.nav')?.querySelector('nav');
+    if(!nav) return;
+    const open=nav.classList.toggle('mobile-open');
+    menu.setAttribute('aria-expanded', String(open));
+    menu.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.textContent=open ? '×' : '☰';
+  });
+});
+
+// Close the mobile navigation after selecting a page/section.
+document.querySelectorAll('.nav nav a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    const nav=link.closest('.nav')?.querySelector('nav');
+    const menu=link.closest('.nav')?.querySelector('.menu');
+    nav?.classList.remove('mobile-open');
+    menu?.setAttribute('aria-expanded','false');
+    menu?.setAttribute('aria-label','Open menu');
+    if(menu) menu.textContent='☰';
+  });
 });
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{

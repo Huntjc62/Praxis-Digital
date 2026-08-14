@@ -38,3 +38,7 @@ The quiz contains 10 server-rendered questions and client-side scoring. Results 
 ## SEO notes
 
 The public pages use clean extensionless URLs, crawlable HTML anchor links, canonical URLs, robots.txt, and an XML sitemap. The admin area remains excluded from indexing. Submit `https://praxis-uk.digital/sitemap.xml` in Google Search Console after deployment.
+
+
+## Mobile navigation fix
+The mobile hamburger menu now opens a full-width navigation panel below the header, closes after a link is selected, and leaves desktop navigation styling unchanged.
