@@ -42,3 +42,7 @@ The public pages use clean extensionless URLs, crawlable HTML anchor links, cano
 
 ## Mobile navigation fix
 The mobile hamburger menu now opens a full-width navigation panel below the header, closes after a link is selected, and leaves desktop navigation styling unchanged.
+
+
+## Cache-busting
+Local CSS and JavaScript assets are versioned with a query string. Increase the version value in the HTML files whenever a new CSS/JS deployment is made so browsers fetch the latest assets without users needing to clear cache.
