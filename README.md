@@ -1,48 +1,12 @@
-# PRAXIS Digital — extensionless URL build
+# PRAXIS Digital
 
-This full package changes the public website URLs from `.html` files to GitHub Pages directory routes.
+Full PRAXIS Digital website package. Includes clean URLs, SEO, website quiz, Firebase enquiries/admin, mobile navigation, and a Firebase-powered Resources library for PDFs/files.
 
-Routes:
-- `/` Home
-- `/services/` Services
-- `/websites/` New websites
-- `/redesign/` Website transformation
-- `/systems/` Digital systems
-- `/software/` Bespoke software
-- `/work/` Our Work
-- `/admin/` Admin dashboard
+## Resources library setup
+1. In Firebase Console, enable **Storage** for the project `praxis-363bf`.
+2. Deploy Firestore and Storage rules from this package (`firestore.rules` and `storage.rules`).
+3. Sign into `/admin/` using your existing Firebase admin account.
+4. Use **Resource library** to upload PDFs/files, add a title/description, and publish them.
+5. Published resources appear automatically at `/resources/` and can be linked from other pages using their public download URL.
 
-The package retains the PRAXIS Firebase enquiry system and includes the PRAXIS Digital logo, CSS, JavaScript, Firebase configuration, Firestore rules, CNAME and `.nojekyll`.
-
-Because the custom domain `praxis-uk.digital` is connected to GitHub Pages, the internal links use root-relative paths. Upload the package contents to the root of the GitHub Pages repository.
-
-
-## Google SEO / indexing setup
-
-This package includes:
-- `robots.txt` allowing Google and other search crawlers to access the public site while disallowing `/admin/`.
-- `sitemap.xml` containing the canonical public PRAXIS URLs.
-- Canonical URLs, Open Graph/Twitter metadata and descriptive page titles/descriptions.
-- JSON-LD structured data for the website, service pages and public collections.
-- A `noindex` directive on the admin page.
-
-After deploying to `https://praxis-uk.digital/`, verify the domain in Google Search Console and submit `https://praxis-uk.digital/sitemap.xml`. Then use URL Inspection to request indexing for the homepage and key service pages. A sitemap helps discovery but does not guarantee indexing or rankings.
-
-
-## New in this version: Website Replacement Quiz
-
-Public page: https://praxis-uk.digital/website-quiz/
-
-The quiz contains 10 server-rendered questions and client-side scoring. Results are grouped into: keep/optimise, transform, or rebuild. The page is linked from the homepage and primary navigation and has a canonical URL, descriptive metadata, Open Graph/Twitter metadata, WebPage and BreadcrumbList structured data, and a sitemap entry.
-
-## SEO notes
-
-The public pages use clean extensionless URLs, crawlable HTML anchor links, canonical URLs, robots.txt, and an XML sitemap. The admin area remains excluded from indexing. Submit `https://praxis-uk.digital/sitemap.xml` in Google Search Console after deployment.
-
-
-## Mobile navigation fix
-The mobile hamburger menu now opens a full-width navigation panel below the header, closes after a link is selected, and leaves desktop navigation styling unchanged.
-
-
-## Cache-busting
-Local CSS and JavaScript assets are versioned with a query string. Increase the version value in the HTML files whenever a new CSS/JS deployment is made so browsers fetch the latest assets without users needing to clear cache.
+Maximum upload size in the website: 25MB.

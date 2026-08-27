@@ -1,0 +1,7 @@
+import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { db } from "./firebase-config.js";
+const grid=document.getElementById('resourceGrid'); const empty=document.getElementById('resourceEmpty');
+function esc(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function card(x){const type=(x.fileType||'FILE').split('/').pop().toUpperCase(); return `<article class="resource-card"><div class="resource-file"><span>${esc(type)}</span><b>↗</b></div><div class="resource-card-body"><small>${esc(x.category||'PRAXIS RESOURCE')}</small><h3>${esc(x.title||x.fileName||'Download')}</h3><p>${esc(x.description||'A practical PRAXIS Digital resource.')}</p><a href="${esc(x.downloadUrl)}" target="_blank" rel="noopener noreferrer">Open / download ↗</a></div></article>`;}
+async function load(){try{const q=query(collection(db,'resources'),where('published','==',true)); const snap=await getDocs(q); const items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)); if(!items.length){grid.hidden=true;empty.hidden=false;return;} grid.innerHTML=items.map(card).join('');}catch(e){console.error('PRAXIS resources error',e);grid.innerHTML='<div class="resource-empty"><h2>Resources are temporarily unavailable.</h2><p>Please try again shortly.</p></div>';}}
+load();
