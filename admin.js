@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 import { collection, query, orderBy, onSnapshot, doc, getDoc, updateDoc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
-import { auth, db } from "./firebase-config.js";
+import { auth, db } from "/firebase-config.js";
 import { collection as storageCollection, query as storageQuery, where as storageWhere, getDocs as storageGetDocs, addDoc as storageAddDoc, deleteDoc as storageDeleteDoc, doc as storageDoc, serverTimestamp as storageTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-storage.js";
 const loginView=document.getElementById('loginView'), dashboardView=document.getElementById('dashboardView'), loginForm=document.getElementById('loginForm'), loginError=document.getElementById('loginError'), logoutBtn=document.getElementById('logoutBtn'), adminUser=document.getElementById('adminUser'), enquiryList=document.getElementById('enquiryList'), searchInput=document.getElementById('searchInput'), statusFilter=document.getElementById('statusFilter'), projectFilter=document.getElementById('projectFilter'), resultCount=document.getElementById('resultCount'), modalBackdrop=document.getElementById('modalBackdrop');

@@ -1,5 +1,5 @@
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
-import { db } from "./firebase-config.js";
+import { db } from "/firebase-config.js";
 const grid=document.getElementById('resourceGrid'); const empty=document.getElementById('resourceEmpty');
 function esc(v=''){return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 function card(x){const type=(x.fileType||'FILE').split('/').pop().toUpperCase(); return `<article class="resource-card"><div class="resource-file"><span>${esc(type)}</span><b>↗</b></div><div class="resource-card-body"><small>${esc(x.category||'PRAXIS RESOURCE')}</small><h3>${esc(x.title||x.fileName||'Download')}</h3><p>${esc(x.description||'A practical PRAXIS Digital resource.')}</p><a href="${esc(x.downloadUrl)}" target="_blank" rel="noopener noreferrer">Open / download ↗</a></div></article>`;}
