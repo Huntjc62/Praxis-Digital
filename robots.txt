@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
+Disallow: /admin.html
 
 Sitemap: https://praxis-uk.digital/sitemap.xml

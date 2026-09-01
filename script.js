@@ -1,7 +1,7 @@
 // PRAXIS canonical navigation fallback
 // Keeps the main What We Build journey on the custom domain even if a cached page contains an older relative URL.
-document.querySelectorAll('a[href$="/what-we-build/"], a[href="/what-we-build/"]').forEach(link => {
-  link.setAttribute('href', 'https://praxis-uk.digital/what-we-build/');
+document.querySelectorAll('a[href$="/what-we-build.html"], a[href="/what-we-build.html"]').forEach(link => {
+  link.setAttribute('href', 'https://praxis-uk.digital/what-we-build.html');
 });
 
 const menuButton = document.querySelector('.menu');

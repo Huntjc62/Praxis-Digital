@@ -1,17 +1,20 @@
-# PRAXIS Digital
+# PRAXIS Digital — Flat GitHub Pages Package
 
+This version deliberately contains **all website pages as files in the repository root**. There are no page folders.
 
-3. Sign into `/admin/` using your existing Firebase admin account.
+Pages:
+- index.html
+- what-we-build.html
+- services.html
+- marketing.html
+- websites.html
+- redesign.html
+- systems.html
+- software.html
+- work.html
+- website-quiz.html
+- admin.html
 
-Maximum upload size in the website: 25MB.
+The site therefore uses `.html` URLs. This is the reliable approach for a completely flat GitHub Pages repository; clean `/page/` URLs require directory-based `index.html` files or another routing layer.
 
-
-
-
-New pages: /what-we-build/ (service chooser) and /marketing/ (marketing and creative services). The existing /services/ page remains the software/web development destination.
-
-
-Navigation fix: What we build now uses the canonical custom-domain URL https://praxis-uk.digital/what-we-build/ and its two choices link directly to https://praxis-uk.digital/services/ and https://praxis-uk.digital/marketing/. Cache version bumped.
-
-
-IMPORTANT: The What We Build page is located at `what-we-build/index.html`. When uploading to GitHub Pages, upload the `what-we-build` folder itself and keep its `index.html` inside it. The clean URL is `https://praxis-uk.digital/what-we-build/`. Do not flatten the folder contents into the repository root.
+Keep `CNAME`, `firebase-config.js`, `firebase-enquiries.js`, `firestore.rules`, `firebase.json`, `styles.css`, `script.js`, `admin.js`, `robots.txt`, `sitemap.xml`, `.nojekyll`, and `praxis-digital-logo.png` in the repository root.
