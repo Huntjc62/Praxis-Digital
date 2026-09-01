@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRAXIS Digital</title>
+<meta name="robots" content="noindex">
+<style>html,body{margin:0;background:#f3f1ec;color:#111;font-family:Arial,Helvetica,sans-serif}#fallback{min-height:100vh;display:grid;place-items:center;text-align:center;padding:40px;box-sizing:border-box}#fallback a{color:#4b20c8}</style>
+</head>
+<body>
+<div id="fallback"><div><h1>Loading PRAXIS Digital…</h1><p><a href="/">Return home</a></p></div></div>
+<script>
+(function(){
+  const path = location.pathname.replace(/\/+$/,'') || '/';
+  const routes = {
+    '/what-we-build':'/what-we-build.html',
+    '/services':'/services/',
+    '/marketing':'/marketing/',
+    '/websites':'/websites/',
+    '/redesign':'/redesign/',
+    '/systems':'/systems/',
+    '/software':'/software/',
+    '/work':'/work/',
+    '/website-quiz':'/website-quiz/'
+  };
+  if (routes[path]) {
+    fetch(routes[path], {cache:'no-store'}).then(function(r){
+      if(!r.ok) throw new Error('route');
+      return r.text();
+    }).then(function(html){
+      var doc = new DOMParser().parseFromString(html,'text/html');
+      document.title = doc.title;
+      document.head.querySelectorAll('meta:not([charset]),link,style').forEach(function(n){ if(n.tagName==='LINK' || n.tagName==='STYLE') n.remove(); });
+      doc.head.querySelectorAll('meta').forEach(function(m){ if(!m.hasAttribute('charset')) document.head.appendChild(document.importNode(m,true)); });
+      doc.head.querySelectorAll('link[rel="stylesheet"]').forEach(function(l){ document.head.appendChild(document.importNode(l,true)); });
+      doc.head.querySelectorAll('style').forEach(function(s){ document.head.appendChild(document.importNode(s,true)); });
+      document.body.innerHTML = doc.body.innerHTML;
+      doc.querySelectorAll('script').forEach(function(old){
+        if(old.src){ var s=document.createElement('script'); s.src=old.src; s.defer=true; document.body.appendChild(s); }
+        else if(old.textContent){ var s=document.createElement('script'); s.textContent=old.textContent; document.body.appendChild(s); }
+      });
+      document.querySelectorAll('a[href="/what-we-build/"]').forEach(function(a){ a.href='/what-we-build/'; });
+    }).catch(function(){ location.replace('/what-we-build.html'); });
+  }
+})();
+</script>
+</body>
+</html>
