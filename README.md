@@ -12,3 +12,6 @@ New pages: /what-we-build/ (service chooser) and /marketing/ (marketing and crea
 
 
 Navigation fix: What we build now uses the canonical custom-domain URL https://praxis-uk.digital/what-we-build/ and its two choices link directly to https://praxis-uk.digital/services/ and https://praxis-uk.digital/marketing/. Cache version bumped.
+
+
+IMPORTANT: The What We Build page is located at `what-we-build/index.html`. When uploading to GitHub Pages, upload the `what-we-build` folder itself and keep its `index.html` inside it. The clean URL is `https://praxis-uk.digital/what-we-build/`. Do not flatten the folder contents into the repository root.
