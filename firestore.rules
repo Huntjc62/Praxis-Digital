@@ -4,10 +4,6 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'; }
     match /users/{userId} { allow read: if signedIn() && request.auth.uid == userId; allow write: if false; }
-    match /resources/{resourceId} {
-      allow read: if resource.data.published == true || isAdmin();
-      allow create, update, delete: if isAdmin();
-    }
     match /enquiries/{enquiryId} {
       allow create: if request.resource.data.source == 'website' && request.resource.data.status == 'new' && request.resource.data.notes == '' && request.resource.data.name is string && request.resource.data.name.size() >= 2 && request.resource.data.name.size() <= 100 && request.resource.data.business is string && request.resource.data.business.size() >= 2 && request.resource.data.business.size() <= 150 && request.resource.data.email is string && request.resource.data.email.size() >= 5 && request.resource.data.email.size() <= 200 && request.resource.data.phone is string && request.resource.data.phone.size() <= 40 && request.resource.data.project is string && request.resource.data.project.size() >= 2 && request.resource.data.project.size() <= 100 && request.resource.data.message is string && request.resource.data.message.size() <= 5000 && request.resource.data.createdAt is timestamp;
       allow read, update, delete: if isAdmin();

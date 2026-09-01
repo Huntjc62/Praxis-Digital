@@ -1,6 +1,15 @@
-document.querySelector('.menu')?.addEventListener('click',()=>{
-  document.querySelector('.nav nav')?.classList.toggle('mobile-open');
+const menuButton = document.querySelector('.menu');
+const mainNav = document.querySelector('.nav nav');
+menuButton?.addEventListener('click',()=>{
+  const open = mainNav?.classList.toggle('mobile-open');
+  menuButton.setAttribute('aria-expanded', String(!!open));
+  menuButton.textContent = open ? '×' : '☰';
 });
+mainNav?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+  mainNav.classList.remove('mobile-open');
+  menuButton?.setAttribute('aria-expanded','false');
+  if(menuButton) menuButton.textContent='☰';
+}));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const target=document.querySelector(a.getAttribute('href'));
@@ -167,3 +176,15 @@ if (websiteQuizForm) {
 
   updateQuizProgress();
 }
+
+
+document.querySelectorAll('.capability-toggle').forEach(button=>{
+  button.addEventListener('click',()=>{
+    const detail=button.nextElementSibling;
+    const open=button.getAttribute('aria-expanded')==='true';
+    button.setAttribute('aria-expanded', String(!open));
+    detail?.classList.toggle('open', !open);
+    const icon=button.querySelector('b');
+    if(icon) icon.textContent = open ? '+' : '−';
+  });
+});

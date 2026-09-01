@@ -290,3 +290,14 @@ footer{background:var(--ink);color:#fff;padding:0 5vw 25px}.foot-top{border-top:
 @media(max-width:800px){.quiz-promo{grid-template-columns:1fr;gap:35px}}
 
 
+\n\n/* PRAXIS build chooser + marketing */
+.build-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:42px}
+.build-choice{display:flex;flex-direction:column;min-height:520px;padding:48px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+.build-choice:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(16,16,16,.12)}
+.build-choice-dark{background:#101010;color:#fff}.build-choice-light{background:#f2f0eb;color:#101010;border:1px solid #dedbd3}
+.choice-number{font-size:14px;font-weight:700;letter-spacing:.12em;margin-bottom:65px}.choice-kicker{font-size:12px;font-weight:800;letter-spacing:.14em;color:#cfff3f}.build-choice-light .choice-kicker{color:#3026b8}
+.build-choice h2{font-family:Manrope, sans-serif;font-size:clamp(42px,5vw,76px);line-height:.96;letter-spacing:-.055em;margin:0 0 28px}.build-choice h2 em{font-style:normal;color:#cfff3f}.build-choice-light h2 em{color:#3026b8}
+.build-choice p{font-size:17px;line-height:1.65;max-width:600px;opacity:.78}.choice-link{margin-top:auto;padding-top:36px;font-weight:800}.choice-link b{margin-left:8px;color:#cfff3f}.build-choice-light .choice-link b{color:#3026b8}
+.marketing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:45px}.marketing-card{padding:34px;background:#f2f0eb;border:1px solid #dedbd3}.marketing-card>span{font-size:12px;font-weight:800;letter-spacing:.12em;color:#3026b8}.marketing-card h3{font-family:Manrope,sans-serif;font-size:30px;letter-spacing:-.04em;margin:55px 0 15px}.marketing-card p{line-height:1.65;opacity:.78}.capability-toggle{width:100%;margin-top:24px;padding:15px 0;background:none;border:0;border-top:1px solid #c8c5bd;text-align:left;font:700 13px inherit;cursor:pointer;display:flex;justify-content:space-between}.capability-toggle b{font-size:20px;color:#3026b8}.capability-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}.capability-detail p{overflow:hidden;margin:0}.capability-detail.open{grid-template-rows:1fr}.capability-detail.open p{padding-top:4px}.marketing-split{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+@media(max-width:800px){.build-choice-grid,.marketing-split{grid-template-columns:1fr}.build-choice{min-height:460px;padding:32px}.marketing-grid{grid-template-columns:1fr}.choice-number{margin-bottom:45px}}
+@media(max-width:800px){.nav nav.mobile-open{display:flex!important;position:absolute;left:0;right:0;top:100%;background:#101010;padding:18px 22px 26px;flex-direction:column;gap:0;z-index:1000;box-shadow:0 18px 30px rgba(0,0,0,.18)}.nav nav.mobile-open a{color:#fff!important;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.12)}.nav .menu{position:relative;z-index:1001}}

@@ -8,4 +8,7 @@
   <url><loc>https://praxis-uk.digital/software/</loc><lastmod>2026-08-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://praxis-uk.digital/work/</loc><lastmod>2026-08-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://praxis-uk.digital/website-quiz/</loc><lastmod>2026-08-27</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <url><loc>https://praxis-uk.digital/what-we-build/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://praxis-uk.digital/marketing/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>
